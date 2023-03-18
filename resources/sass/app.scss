@@ -6,3 +6,33 @@
 
 // Bootstrap
 @import 'bootstrap/scss/bootstrap';
+
+.productshome {
+    background: rgba(230, 230, 230, 0.253);
+    border-radius: 15px;
+    padding: 15px 10px 0 10px;
+}
+
+.price-mob {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.product-block {
+    display: flex;
+    background: white;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    border-radius: 10px;
+    margin: 0 5px 0 5px;
+}
+
+img {
+    object-fit: contain;
+    width: 100%;
+}
+
+// #app {
+//     background: rgba(230, 230, 230, 0.822);
+// }
