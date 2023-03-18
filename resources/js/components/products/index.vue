@@ -1,14 +1,16 @@
 <template>
     <div class="container">
         <div>
-            <div class="row">
-                <div class="col-12">
-                    <h1 class="page-header">{{ product.name }}</h1>
-                </div>
+            <div class="col-12">
+                <h1 class="page-header">{{ product.name }}</h1>
+            </div>
 
+            <div class="row">
                 <div class="col-lg-6 mb-4">
-                    <div class="main-product-image">
-                        <img :src="baseUrl + '/' + product.photo" :alt="product.details">
+                    <div class>
+                        <div class="main-product-image">
+                            <img :src="baseUrl + '/' + product.photo" :alt="product.details">
+                        </div>
                     </div>
                 </div>
                 <div class="col-lg-6">
@@ -16,7 +18,7 @@
                         <div class="form-group price_elem row">
                             <label class="col-sm-3 col-md-3 form-control-label nopaddingtop">Price:</label>
                             <div class="col-sm-8 col-md-9">
-                                <span class="product-form-price" id="product-form-price">${{ product.price }}</span>
+                                <span class="product-form-price" id="product-form-price">{{ product.price }}€</span>
                             </div>
                         </div>
 
