@@ -3,13 +3,12 @@
         <div>
             <div class="row">
                 <div class="col-12">
-                    <h1 class="page-header">iMac Desktop Computer</h1>
+                    <h1 class="page-header">{{ product.name }}</h1>
                 </div>
 
                 <div class="col-lg-6 mb-4">
                     <div class="main-product-image">
-                        <img src="https://dt7v1i9vyp3mf.cloudfront.net/styles/news_large/s3/imagelibrary/a/applenotes02-0708-N5XC8GqolB4ZiZtz.dDOayRMDD7SOljK.jpg"
-                            alt="iMac Desktop Computer">
+                        <img :src="baseUrl + '/' + product.photo" :alt="product.details">
                     </div>
                 </div>
                 <div class="col-lg-6">
@@ -17,7 +16,7 @@
                         <div class="form-group price_elem row">
                             <label class="col-sm-3 col-md-3 form-control-label nopaddingtop">Price:</label>
                             <div class="col-sm-8 col-md-9">
-                                <span class="product-form-price" id="product-form-price">$1.200.000</span>
+                                <span class="product-form-price" id="product-form-price">${{ product.price }}</span>
                             </div>
                         </div>
 
@@ -41,13 +40,7 @@
                         <div class="form-group row">
                             <label class="col-sm-3 col-md-3 form-control-label">Description:</label>
                             <div class="col-sm-8 col-md-9 description">
-                                <p>The idea behind iMac has never wavered: to craft the ultimate desktop experience. The
-                                    best display, paired with high-performance processors, graphics, and storage — all
-                                    within an incredibly thin, seamless enclosure. And that commitment continues with the
-                                    all-new 21.5‑inch iMac with Retina 4K display. Like the revolutionary 27‑inch
-                                    5K&nbsp;model, it delivers such spectacular image quality that everything else around
-                                    you seems to disappear. Adding up to the most immersive iMac experience yet — and
-                                    another big, beautiful step&nbsp;forward.</p>
+                                <p>{{ product.description }}</p>
                             </div>
                         </div>
 
@@ -55,7 +48,7 @@
                             <label class="col-sm-3 col-md-3 form-control-label">Details:</label>
                             <div class="col-sm-9 col-md-9">
 
-                                <p>Marca: Apple</p>
+                                <p>{{ product.details }}</p>
 
                             </div>
                         </div>
@@ -68,13 +61,30 @@
 </template>
 
 <script>
+import { ref } from 'vue';
+
 export default {
-    name: 'Products',
+    name: 'Product',
+    props: ['id'],
     data() {
+        return {
+            baseUrl: window.location.origin,
+            product: ref([]),
+        }
     },
     mounted() {
+        this.getItem();
     },
     methods: {
+        getItem() {
+            var page = `/api/v1/product/${this.id}`;
+            axios.get(page)
+                .then(
+                    ({ data }) => {
+                        this.product = data['product'];
+                    }
+                )
+        }
     }
 }
 </script>
