@@ -10,9 +10,10 @@ const routes = [
         component: products,
     },
     {
-        path: '/product',
+        path: '/product/:id',
         name: 'Product',
         component: index,
+        props: true
     },
 ]
 
