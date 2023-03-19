@@ -60,6 +60,13 @@ class AuthController extends Controller
             ];
 
             return response()->json($response, 200);
+        } else {
+            $response = [
+                'success' => false,
+                'message' => 'Error'
+            ];
+
+            return response()->json($response, 200);
         }
     }
 }
