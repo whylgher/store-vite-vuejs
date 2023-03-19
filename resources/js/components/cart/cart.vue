@@ -54,9 +54,9 @@
                                 <p class="mb-2">{{ total }}€</p>
                             </div>
 
-                            <button type="button" class="btn btn-info btn-block btn-lg">
+                            <button @click="purchase" type="button" class="btn btn-info btn-block btn-lg">
                                 <div class="d-flex justify-content-between">
-                                    <span>Checkout <i class="fas fa-long-arrow-alt-right ms-2"></i></span>
+                                    <span>Purchase <i class="fas fa-long-arrow-alt-right ms-2"></i></span>
                                 </div>
                             </button>
 
@@ -69,12 +69,14 @@
 </template>
 
 <script>
+import { useRouter } from 'vue-router';
 
 export default {
     data() {
         return {
             products: [],
             total: 0,
+            router: useRouter(),
         };
     },
     mounted() {
@@ -87,7 +89,6 @@ export default {
                     ({ data }) => {
                         let listProducts = data.products;
                         for (var index in listProducts) {
-                            console.log(listProducts[index].product_id)
                             this.getProduct(listProducts[index].product_id, listProducts[index].quantity)
                         }
                     }
@@ -105,6 +106,14 @@ export default {
         },
         calcTotal(value, qt) {
             this.total = this.total + (value * qt)
+        },
+        purchase() {
+            axios.post('api/purchase')
+                .then(({ data }) => {
+                    if (data.success == true) {
+                        this.router.push('/');
+                    }
+                })
         },
     },
 }
