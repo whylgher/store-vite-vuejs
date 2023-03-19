@@ -25,15 +25,15 @@
                         <div class="form-group row">
                             <label for="Quantity" class="col-sm-3 col-md-3 form-control-label">Quantity:</label>
                             <div class="col-sm-8 col-md-9">
-                                <input type="number" class="qty form-control" id="input-qty" name="qty" maxlength="5"
-                                    value="1">
+                                <input type="number" class="qty form-control" v-model.number="form.quantity">
                             </div>
                         </div>
 
                         <div class="form-group product-stock product-available row visible">
                             <label class="col-sm-3 col-md-3 form-control-label"></label>
                             <div class="col-sm-8 col-sm-offset-3 col-md-9 col-md-offset-3">
-                                <input type="submit" class="adc btn btn-primary" value="Add to Shopping Cart">
+                                <input @click="addCart" type="button" class="adc btn btn-primary"
+                                    value="Add to Shopping Cart">
                                 <a href="javascript:history.back()" class="btn btn-link btn-sm" title="Continue Shopping">←
                                     Continue Shopping</a>
                             </div>
@@ -64,6 +64,7 @@
 
 <script>
 import { ref } from 'vue';
+import { useRouter } from 'vue-router';
 
 export default {
     name: 'Product',
@@ -72,6 +73,12 @@ export default {
         return {
             baseUrl: window.location.origin,
             product: ref([]),
+            router: useRouter(),
+            form: ref({
+                user_id: '',
+                quantity: 1,
+                product_id: '',
+            })
         }
     },
     mounted() {
@@ -84,9 +91,29 @@ export default {
                 .then(
                     ({ data }) => {
                         this.product = data['product'];
+                        this.form.product_id = data['product']['id'];
                     }
                 )
-        }
+        },
+        addCart() {
+            var page = `/api/v1/cart`;
+            try {
+                axios.get('/api/user')
+                    .then(({ data }) => {
+                        this.form.user_id = data.id;
+                        axios.post(page, this.form)
+                            .then(
+                                ({ data }) => {
+                                    if (data.success == true) {
+                                        this.router.push('/cart');
+                                    }
+                                }
+                            )
+                    });
+            } catch {
+                this.router.push('/login');
+            }
+        },
     }
 }
 </script>
