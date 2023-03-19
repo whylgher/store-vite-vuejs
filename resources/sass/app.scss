@@ -28,15 +28,6 @@
     margin: 0 5px 0 5px;
 }
 
-img {
-    object-fit: contain;
-    width: 100%;
-}
-
-// #app {
-//     background: rgba(230, 230, 230, 0.822);
-// }
-
 .submit {
     color: rgba(35, 35, 35, 0.8);
     background: rgba(220, 220, 220, 1);
@@ -78,4 +69,20 @@ img {
 .text-danger {
     color: red;
     font-size: 16px;
+}
+
+#toolbar-store {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+#toolbar-botton {
+    margin: 5px 10px 5px 10px;
+}
+
+img {
+    object-fit: contain;
+    width: 100%;
 }

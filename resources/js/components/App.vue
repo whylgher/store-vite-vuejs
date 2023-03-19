@@ -1,16 +1,16 @@
 <template>
-    <toolbar>
-        <div>
+    <toolbar id="toolbar-store">
+        <div id="toolbar-botton">
             <router-link to="/"> Home </router-link>
         </div>
-        <div>
+        <div id="toolbar-botton">
             <router-link to="/cart"> Cart </router-link>
         </div>
-        <div>
+        <div id="toolbar-botton">
             <router-link to="/login"> Login </router-link>
         </div>
-        <div>
-            <button @click="logout"> Log out </button>
+        <div id="toolbar-botton">
+            <router-link to="" @click="logout"> Log out </router-link>
         </div>
     </toolbar>
     <router-view />
