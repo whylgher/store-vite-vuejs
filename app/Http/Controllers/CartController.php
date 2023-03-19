@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Cart;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
 {
@@ -14,7 +15,8 @@ class CartController extends Controller
 
     public function index()
     {
-        $products = Cart::all();
+        $user = Auth::user();
+        $products = Cart::all()->where('user_id', '=', $user->id);
 
         return response()->json([
             'products' => $products
