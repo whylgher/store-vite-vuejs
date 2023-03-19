@@ -4,6 +4,9 @@
             <router-link to="/"> Home </router-link>
         </div>
         <div>
+            <router-link to="/cart"> Cart </router-link>
+        </div>
+        <div>
             <router-link to="/login"> Login </router-link>
         </div>
         <div>
